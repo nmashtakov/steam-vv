@@ -127,16 +127,19 @@
             buffLinkCell.appendChild(buffBtnContainer);
         }
 
-        // Функция для копирования текста в буфер обмена
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('Ссылка скопирована: ' + text);
-        }
+	    // Функция для копирования текста в буфер обмена
+	function copyToClipboard(text) {
+	    const tempInput = document.createElement('input');
+	    tempInput.style.position = 'absolute';
+	    tempInput.style.left = '-9999px';
+	    tempInput.style.top = '0';
+	    tempInput.value = text;
+	    document.body.appendChild(tempInput);
+	    tempInput.select();
+	    document.execCommand('copy');
+	    document.body.removeChild(tempInput);
+	    alert('Ссылка скопирована: ' + text);
+	}
 
         // Разбор параметров URL запроса для получения данных
         const urlParams = new URLSearchParams(window.location.search);
