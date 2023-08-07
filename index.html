@@ -4,14 +4,43 @@
     <title>Новые предметы</title>
     <meta charset="UTF-8">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
         }
 
         th, td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             padding: 8px;
+            text-align: center;
         }
 
         th {
@@ -20,16 +49,36 @@
     </style>
 </head>
 <body>
-    <h1>Список новых предметов</h1>
-    <table>
-        <tr>
-            <th>Название</th>
-            <th>Минимальная цена продажи в Steam</th>
-            <th>Ссылка на Steam</th>
-            <th>Цена Buff</th>
-            <th>Ссылка Buff</th>
-        </tr>
-        <!-- Вставьте здесь место для вывода данных -->
-    </table>
+    <div class="container">
+        <h1>Список новых предметов</h1>
+        <table>
+            <tr>
+                <th>Название</th>
+                <th>Минимальная цена продажи в Steam</th>
+                <th>Ссылка на Steam</th>
+                <th>Цена Buff</th>
+                <th>Ссылка Buff</th>
+            </tr>
+            <!-- Место для вывода данных -->
+        </table>
+    </div>
+    <script>
+        // Функция для отображения данных о новых предметах
+        function displayNewItems(newItems, itemData) {
+            const tableBody = document.querySelector('table');
+            newItems.forEach(item => {
+                const data = itemData[item];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${data.name}</td>
+                    <td>${data.min_sell_price}</td>
+                    <td><a href="${data.link}" target="_blank">Ссылка</a></td>
+                    <td>${data.buff_price}</td>
+                    <td><a href="${data.buff_link}" target="_blank">Ссылка</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
 </body>
 </html>
