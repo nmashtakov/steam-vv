@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Новые предметы</title>
+    <title>Buff → Steam</title>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="doggy.png">
     <style>
@@ -22,14 +22,14 @@
             padding: 20px;
         }
 
-    	h1 {
-    	    background-color: #b3e2e2;
-    	    color: #000000;
-    	    padding: 20px;
-    	    margin: 0;
-    	    text-align: center;
-    	    border-radius: 1px 1px 0 0;
-	}
+        h1 {
+            background-color: #b3e2e2;
+            color: #000000;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+            border-radius: 1px 1px 0 0;
+        }
 
         table {
             border-collapse: collapse;
@@ -37,6 +37,7 @@
             border-radius: 0 0 10px 10px;
             overflow: hidden;
             margin: 0 auto; /* Центрируем таблицу */
+            width: 100%; /* Занимает 100% доступной ширины */
         }
 
         th, td {
@@ -48,6 +49,11 @@
 
         th {
             background-color: #e0f1f2; /* Изменили цвет шапки таблицы на более светлый голубой */
+        }
+
+        /* Добавляем стиль для четных строк таблицы */
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Менее яркий цвет для четных строк */
         }
 
         /* Добавляем стиль для кнопок "Открыть" и "Скопировать" */
@@ -72,20 +78,20 @@
             <th style="width: 40%;">Название</th>
             <th style="width: 15%;">Минимальная цена продажи в Steam</th>
             <th style="width: 15%;">
-    	        <div class="btn-container">
-    	    	    Ссылка на Steam <button id="openAllSteamLinksBtn">Открыть все</button>
-    	    	</div>
-    	    </th>
-            <th style="width: 15%;">Цена Buff</th>
-    	    <th style="width: 15%;">
-	        <div class="btn-container">
-            	    Ссылка на Buff <button id="openAllBuffLinksBtn">Открыть все</button>
+                <div class="btn-container">
+                    Ссылка на Steam <button id="openAllSteamLinksBtn">Открыть все</button>
                 </div>
-    	    </th>
+            </th>
+            <th style="width: 15%;">Цена Buff</th>
+            <th style="width: 15%;">
+                <div class="btn-container">
+                    Ссылка на Buff <button id="openAllBuffLinksBtn">Открыть все</button>
+                </div>
+            </th>
         </tr>
         <!-- Здесь будут формироваться строки с данными -->
     </table>
-
+	
     <script>
         // Функция для создания новой строки в таблице
         function createTableRow(name, steamPrice, steamLink, buffPrice, buffLink) {
