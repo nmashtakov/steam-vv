@@ -49,36 +49,60 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Список новых предметов</h1>
-        <table>
-            <tr>
-                <th>Название</th>
-                <th>Минимальная цена продажи в Steam</th>
-                <th>Ссылка на Steam</th>
-                <th>Цена Buff</th>
-                <th>Ссылка Buff</th>
-            </tr>
-            <!-- Место для вывода данных -->
-        </table>
-    </div>
+    <h1>Новые предметы на Steam</h1>
+    <table id="newItemsTable">
+        <tr>
+            <th>Название</th>
+            <th>Минимальная цена продажи в Steam</th>
+            <th>Ссылка на Steam</th>
+            <th>Цена Buff</th>
+            <th>Ссылка Buff</th>
+        </tr>
+    </table>
+
     <script>
-        // Функция для отображения данных о новых предметах
-        function displayNewItems(newItems, itemData) {
-            const tableBody = document.querySelector('table');
-            newItems.forEach(item => {
-                const data = itemData[item];
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${data.name}</td>
-                    <td>${data.min_sell_price}</td>
-                    <td><a href="${data.link}" target="_blank">Ссылка</a></td>
-                    <td>${data.buff_price}</td>
-                    <td><a href="${data.buff_link}" target="_blank">Ссылка</a></td>
-                `;
-                tableBody.appendChild(row);
-            });
+        // Функция для создания новой строки в таблице
+        function createTableRow(name, steamPrice, steamLink, buffPrice, buffLink) {
+            const table = document.getElementById('newItemsTable');
+            const newRow = table.insertRow();
+
+            const nameCell = newRow.insertCell();
+            nameCell.textContent = name;
+
+            const steamPriceCell = newRow.insertCell();
+            steamPriceCell.textContent = steamPrice;
+
+            const steamLinkCell = newRow.insertCell();
+            const steamLinkAnchor = document.createElement('a');
+            steamLinkAnchor.href = steamLink;
+            steamLinkAnchor.textContent = 'Ссылка';
+            steamLinkCell.appendChild(steamLinkAnchor);
+
+            const buffPriceCell = newRow.insertCell();
+            buffPriceCell.textContent = buffPrice;
+
+            const buffLinkCell = newRow.insertCell();
+            const buffLinkAnchor = document.createElement('a');
+            buffLinkAnchor.href = buffLink;
+            buffLinkAnchor.textContent = 'Ссылка';
+            buffLinkCell.appendChild(buffLinkAnchor);
         }
+
+        // Разбор параметров URL запроса для получения данных
+        const urlParams = new URLSearchParams(window.location.search);
+        const names = urlParams.getAll('names[]');
+        const prices = urlParams.getAll('prices[]');
+        const links = urlParams.getAll('links[]');
+        const buffs = urlParams.getAll('buffs[]');
+        const buffLinks = urlParams.getAll('buff_links[]');
+
+        // Создание строк в таблице с полученными данными
+        for (let i = 0; i < names.length; i++) {
+            createTableRow(names[i], prices[i], links[i], buffs[i], buffLinks[i]);
+        }
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
