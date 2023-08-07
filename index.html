@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="doggy.png">
     <style>
+        /* Ваши стили здесь */
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
@@ -27,14 +29,14 @@
             color: #000000;
             padding: 20px;
             margin: 0;
-            text-align: center;
-            border-radius: 1px 1px 0 0;
+            text-align: center; /* Выравниваем название по центру */
+            border-radius: 10px 10px 0 0; /* Скругление верхних углов */
         }
 
         table {
             border-collapse: collapse;
             max-width: 1200px; /* Установили максимальную ширину таблицы */
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 10px 10px; /* Скругление нижних углов таблицы */
             overflow: hidden;
             margin: 0 auto; /* Центрируем таблицу */
             width: 100%; /* Занимает 100% доступной ширины */
@@ -49,6 +51,7 @@
 
         th {
             background-color: #e0f1f2; /* Изменили цвет шапки таблицы на более светлый голубой */
+            border-radius: 10px 10px 0 0; /* Скругление верхних углов столбцов */
         }
 
         /* Добавляем стиль для четных строк таблицы */
@@ -70,26 +73,24 @@
             text-decoration: underline;
         }
 
-	/* Выравниваем надпись по левому краю таблицы */
+        /* Выравниваем "Дата и время создания таблицы" по центру */
         div {
-            text-align: left;
-            padding-left: 20px;
+            text-align: center;
         }
-
-        /* Скругляем верхнюю часть таблицы */
-        h1 {
-            background-color: #b3e2e2;
-            color: #000000;
-            padding: 20px;
-            margin: 0;
-            text-align: left;
-            border-radius: 10px 10px 0 0; /* Скругление верхних углов */
+        
+        /* Выравниваем "Дата и время создания таблицы" по центру */
+        p {
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <h1>Новые предметы Buff → Steam</h1>
+    <div>
+        <p>Дата и время создания таблицы: <span id="creationDateTime"></span></p>
+    </div>
     <table id="newItemsTable">
+        <!-- Шапка таблицы -->
         <tr>
             <th style="width: 40%;">Название</th>
             <th style="width: 15%;">Минимальная цена продажи в Steam</th>
@@ -216,6 +217,22 @@
         // Добавляем обработчик события для нажатия на кнопку "Открыть все" в столбце "Ссылка на Buff"
         const openAllBuffLinksBtn = document.getElementById('openAllBuffLinksBtn');
         openAllBuffLinksBtn.addEventListener('click', openAllBuffLinks);
+
+        // Получение текущей даты и времени
+        const currentDateTime = new Date();
+
+        // Функция для форматирования числа в двузначное
+        function formatTwoDigits(num) {
+            return num.toString().padStart(2, '0');
+        }
+
+        // Форматирование даты и времени в нужном формате
+        const formattedDate = `${formatTwoDigits(currentDateTime.getDate())}.${formatTwoDigits(currentDateTime.getMonth() + 1)}.${currentDateTime.getFullYear()}`;
+        const formattedTime = `${formatTwoDigits(currentDateTime.getHours())}:${formatTwoDigits(currentDateTime.getMinutes())}:${formatTwoDigits(currentDateTime.getSeconds())}`;
+
+        // Установка значения в элемент <span>
+        const creationDateTimeElement = document.getElementById('creationDateTime');
+        creationDateTimeElement.textContent = `${formattedDate} ${formattedTime}`;
     </script>
 </body>
 </html> 
