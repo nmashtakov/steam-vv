@@ -152,41 +152,6 @@
             alert('Ссылка скопирована: ' + text);
         }
 
-	// Функция для открытия ссылки в новой вкладке, но без перехода на эту вкладку
-	function openLinkInNewTab(url) {
-	    const newTab = window.open();
-	newTab.location.href = url;
-	}
-	
-	// Обработчик события для кнопки "Открыть все" в столбце "Ссылка на Steam"
-	function openAllSteamLinks() {
-	    const allSteamLinks = document.querySelectorAll('.steam-link');
-	    allSteamLinks.forEach(link => {
-	        const url = link.getAttribute('data-link');
-	        if (url) {
-	            openLinkInNewTab(url);
-	        }
-	    });
-	}
-	
-	// Обработчик события для кнопки "Открыть все" в столбце "Ссылка на Buff"
-	function openAllBuffLinks() {
-	    const allBuffLinks = document.querySelectorAll('.buff-link');
-	    allBuffLinks.forEach(link => {
-	        const url = link.getAttribute('data-link');
-	        if (url) {
-	            openLinkInNewTab(url);
-	        }
-	    });
-	}
-        // Добавляем обработчик события для нажатия на кнопку "Открыть" в столбце "Ссылка на Steam" колесиком мышки
-        const openAllSteamLinksBtn = document.getElementById('openAllSteamLinksBtn');
-        openAllSteamLinksBtn.addEventListener('mouseup', openAllSteamLinks);
-
-        // Добавляем обработчик события для нажатия на кнопку "Открыть" в столбце "Ссылка на Buff" колесиком мышки
-        const openAllBuffLinksBtn = document.getElementById('openAllBuffLinksBtn');
-        openAllBuffLinksBtn.addEventListener('mouseup', openAllBuffLinks);
-	    
         // Разбор параметров URL запроса для получения данных
         const urlParams = new URLSearchParams(window.location.search);
         const names = urlParams.getAll('names[]');
@@ -231,4 +196,4 @@
         openAllBuffLinksBtn.addEventListener('click', openAllBuffLinks);
     </script>
 </body>
-</html>
+</html> 
