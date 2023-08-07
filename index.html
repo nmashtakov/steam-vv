@@ -179,6 +179,13 @@
 	        }
 	    });
 	}
+	// Добавляем обработчик события для нажатия на кнопку "Открыть" в столбце "Ссылка на Steam" колесиком мышки
+    	const openAllSteamLinksBtn = document.getElementById('openAllSteamLinksBtn');
+    	openAllSteamLinksBtn.addEventListener('mouseup', openAllSteamLinks);
+
+    	// Добавляем обработчик события для нажатия на кнопку "Открыть" в столбце "Ссылка на Buff" колесиком мышки
+    	const openAllBuffLinksBtn = document.getElementById('openAllBuffLinksBtn');
+    	openAllBuffLinksBtn.addEventListener('mouseup', openAllBuffLinks);
 	    
         // Разбор параметров URL запроса для получения данных
         const urlParams = new URLSearchParams(window.location.search);
