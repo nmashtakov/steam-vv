@@ -70,9 +70,17 @@
         <tr>
             <th style="width: 40%;">Название</th>
             <th style="width: 15%;">Минимальная цена продажи в Steam</th>
-            <th style="width: 15%;">Ссылка на Steam</th>
+            <th style="width: 15%;">
+    	        <div class="btn-container">
+    	    	    Ссылка на Steam <button id="openAllSteamLinksBtn">Открыть все</button>
+    	    	</div>
+    	    </th>
             <th style="width: 15%;">Цена Buff</th>
-            <th style="width: 15%;">Ссылка на Buff</th>
+    	    <th style="width: 15%;">
+	        <div class="btn-container">
+            	    Ссылка на Buff <button id="openAllBuffLinksBtn">Открыть все</button>
+                </div>
+    	    </th>
         </tr>
         <!-- Здесь будут формироваться строки с данными -->
     </table>
@@ -125,17 +133,24 @@
             buffBtnContainer.appendChild(buffLinkOpen);
             buffBtnContainer.appendChild(buffLinkCopy);
             buffLinkCell.appendChild(buffBtnContainer);
+    
+	    steamLinkOpen.setAttribute('data-link', steamLink);
+    	    steamLinkOpen.classList.add('steam-link'); // Добавляем класс steam-link
+
+    	    buffLinkOpen.setAttribute('data-link', buffLink);
+	    buffLinkOpen.classList.add('buff-link'); // Добавляем класс buff-link
         }
 
-	// Функция для копирования текста в буфер обмена
-	function copyToClipboard(text) {
-	    const textarea = document.createElement('textarea');
-	    textarea.value = text;
-	    document.body.appendChild(textarea);
-	    textarea.select();
-	    document.execCommand('copy');
-	    document.body.removeChild(textarea);
-	}
+        // Функция для копирования текста в буфер обмена
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Ссылка скопирована: ' + text);
+        }
 
         // Разбор параметров URL запроса для получения данных
         const urlParams = new URLSearchParams(window.location.search);
@@ -149,6 +164,36 @@
         for (let i = 0; i < names.length; i++) {
             createTableRow(names[i], prices[i], links[i], buffs[i], buffLinks[i]);
         }
+
+        // Обработчик события для кнопки "Открыть все" в столбце "Ссылка на Steam"
+        function openAllSteamLinks() {
+            const allSteamLinks = document.querySelectorAll('.steam-link');
+            allSteamLinks.forEach(link => {
+                const url = link.getAttribute('data-link');
+                if (url) {
+                    window.open(url, '_blank');
+                }
+            });
+        }
+
+        // Добавляем обработчик события для нажатия на кнопку "Открыть все" в столбце "Ссылка на Steam"
+        const openAllSteamLinksBtn = document.getElementById('openAllSteamLinksBtn');
+        openAllSteamLinksBtn.addEventListener('click', openAllSteamLinks);
+
+        // Обработчик события для кнопки "Открыть все" в столбце "Ссылка на Buff"
+        function openAllBuffLinks() {
+            const allBuffLinks = document.querySelectorAll('.buff-link');
+            allBuffLinks.forEach(link => {
+                const url = link.getAttribute('data-link');
+                if (url) {
+                    window.open(url, '_blank');
+                }
+            });
+        }
+
+        // Добавляем обработчик события для нажатия на кнопку "Открыть все" в столбце "Ссылка на Buff"
+        const openAllBuffLinksBtn = document.getElementById('openAllBuffLinksBtn');
+        openAllBuffLinksBtn.addEventListener('click', openAllBuffLinks);
     </script>
 </body>
 </html>
