@@ -14,7 +14,7 @@
         .container {
             max-width: 900px;
             margin: 20px auto;
-            background-color: #fff;
+            background: linear-gradient(135deg, #e0f1f2, #b3e2e2); /* Мягкий градиент с более приглушенными цветами */
             border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -22,7 +22,7 @@
         }
 
         h1 {
-            background-color: #333;
+            background-color: #b3e2e2; /* Изменили цвет шапки на приглушенный бирюзовый */
             color: #fff;
             padding: 20px;
             margin: 0;
@@ -39,26 +39,29 @@
 
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
+            font-size: 16px;
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #e0f1f2; /* Изменили цвет шапки таблицы на более светлый голубой */
         }
     </style>
 </head>
 <body>
     <h1>Новые предметы на Steam</h1>
-    <table id="newItemsTable">
-        <tr>
-            <th>Название</th>
-            <th>Минимальная цена продажи в Steam</th>
-            <th>Ссылка на Steam</th>
-            <th>Цена Buff</th>
-            <th>Ссылка Buff</th>
-        </tr>
-    </table>
+    <div class="container">
+        <table id="newItemsTable">
+            <tr>
+                <th>Название</th>
+                <th>Минимальная цена продажи в Steam</th>
+                <th>Ссылка на Steam</th>
+                <th>Цена Buff</th>
+                <th>Ссылка Buff</th>
+            </tr>
+        </table>
+    </div>
 
     <script>
         // Функция для создания новой строки в таблице
@@ -100,9 +103,6 @@
         for (let i = 0; i < names.length; i++) {
             createTableRow(names[i], prices[i], links[i], buffs[i], buffLinks[i]);
         }
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
