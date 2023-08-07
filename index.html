@@ -51,17 +51,16 @@
 </head>
 <body>
     <h1>Новые предметы на Steam</h1>
-    <div class="container">
-        <table id="newItemsTable">
-            <tr>
-                <th>Название</th>
-                <th>Минимальная цена продажи в Steam</th>
-                <th>Ссылка на Steam</th>
-                <th>Цена Buff</th>
-                <th>Ссылка Buff</th>
-            </tr>
-        </table>
-    </div>
+    <table id="newItemsTable">
+        <tr>
+            <th>Название</th>
+            <th>Минимальная цена продажи в Steam</th>
+            <th>Ссылка на Steam</th>
+            <th>Цена Buff</th>
+            <th>Ссылка Buff</th>
+        </tr>
+        <!-- Здесь будут формироваться строки с данными -->
+    </table>
 
     <script>
         // Функция для создания новой строки в таблице
@@ -76,19 +75,46 @@
             steamPriceCell.textContent = steamPrice;
 
             const steamLinkCell = newRow.insertCell();
-            const steamLinkAnchor = document.createElement('a');
-            steamLinkAnchor.href = steamLink;
-            steamLinkAnchor.textContent = 'Ссылка';
-            steamLinkCell.appendChild(steamLinkAnchor);
+            const steamLinkOpen = document.createElement('span');
+            steamLinkOpen.textContent = 'Открыть';
+            steamLinkOpen.style.cursor = 'pointer';
+            steamLinkOpen.addEventListener('click', () => window.open(steamLink, '_blank'));
+            const steamLinkCopy = document.createElement('span');
+            steamLinkCopy.textContent = 'Скопировать';
+            steamLinkCopy.style.cursor = 'pointer';
+            steamLinkCopy.addEventListener('click', () => copyToClipboard(steamLink));
+
+            steamLinkCell.appendChild(steamLinkOpen);
+            steamLinkCell.appendChild(document.createTextNode(' '));
+            steamLinkCell.appendChild(steamLinkCopy);
 
             const buffPriceCell = newRow.insertCell();
             buffPriceCell.textContent = buffPrice;
 
             const buffLinkCell = newRow.insertCell();
-            const buffLinkAnchor = document.createElement('a');
-            buffLinkAnchor.href = buffLink;
-            buffLinkAnchor.textContent = 'Ссылка';
-            buffLinkCell.appendChild(buffLinkAnchor);
+            const buffLinkOpen = document.createElement('span');
+            buffLinkOpen.textContent = 'Открыть';
+            buffLinkOpen.style.cursor = 'pointer';
+            buffLinkOpen.addEventListener('click', () => window.open(buffLink, '_blank'));
+            const buffLinkCopy = document.createElement('span');
+            buffLinkCopy.textContent = 'Скопировать';
+            buffLinkCopy.style.cursor = 'pointer';
+            buffLinkCopy.addEventListener('click', () => copyToClipboard(buffLink));
+
+            buffLinkCell.appendChild(buffLinkOpen);
+            buffLinkCell.appendChild(document.createTextNode(' '));
+            buffLinkCell.appendChild(buffLinkCopy);
+        }
+
+        // Функция для копирования текста в буфер обмена
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Ссылка скопирована: ' + text);
         }
 
         // Разбор параметров URL запроса для получения данных
