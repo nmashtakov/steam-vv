@@ -21,20 +21,21 @@
             padding: 20px;
         }
 
-        h1 {
-            background-color: #b3e2e2; /* Изменили цвет шапки на приглушенный бирюзовый */
-            color: #fff;
-            padding: 20px;
-            margin: 0;
-            text-align: center;
-            border-radius: 10px 10px 0 0;
-        }
+    	h1 {
+    	    background-color: #b3e2e2;
+    	    color: #000000;
+    	    padding: 20px;
+    	    margin: 0;
+    	    text-align: center;
+    	    border-radius: 1px 1px 0 0;
+	}
 
         table {
             border-collapse: collapse;
-            width: 100%;
+            max-width: 1200px; /* Установили максимальную ширину таблицы */
             border-radius: 0 0 10px 10px;
             overflow: hidden;
+            margin: 0 auto; /* Центрируем таблицу */
         }
 
         th, td {
@@ -47,17 +48,31 @@
         th {
             background-color: #e0f1f2; /* Изменили цвет шапки таблицы на более светлый голубой */
         }
+
+        /* Добавляем стиль для кнопок "Открыть" и "Скопировать" */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /* Стиль для ссылок в кнопках */
+        .btn-link {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <h1>Новые предметы на Steam</h1>
+    <h1>Новые предметы Buff → Steam</h1>
     <table id="newItemsTable">
         <tr>
             <th>Название</th>
             <th>Минимальная цена продажи в Steam</th>
             <th>Ссылка на Steam</th>
             <th>Цена Buff</th>
-            <th>Ссылка Buff</th>
+            <th>Ссылка на Buff</th>
         </tr>
         <!-- Здесь будут формироваться строки с данными -->
     </table>
@@ -75,35 +90,41 @@
             steamPriceCell.textContent = steamPrice;
 
             const steamLinkCell = newRow.insertCell();
+            const steamBtnContainer = document.createElement('div');
+            steamBtnContainer.className = 'btn-container';
+
             const steamLinkOpen = document.createElement('span');
+            steamLinkOpen.className = 'btn-link';
             steamLinkOpen.textContent = 'Открыть';
-            steamLinkOpen.style.cursor = 'pointer';
             steamLinkOpen.addEventListener('click', () => window.open(steamLink, '_blank'));
             const steamLinkCopy = document.createElement('span');
+            steamLinkCopy.className = 'btn-link';
             steamLinkCopy.textContent = 'Скопировать';
-            steamLinkCopy.style.cursor = 'pointer';
             steamLinkCopy.addEventListener('click', () => copyToClipboard(steamLink));
 
-            steamLinkCell.appendChild(steamLinkOpen);
-            steamLinkCell.appendChild(document.createTextNode(' '));
-            steamLinkCell.appendChild(steamLinkCopy);
+            steamBtnContainer.appendChild(steamLinkOpen);
+            steamBtnContainer.appendChild(steamLinkCopy);
+            steamLinkCell.appendChild(steamBtnContainer);
 
             const buffPriceCell = newRow.insertCell();
             buffPriceCell.textContent = buffPrice;
 
             const buffLinkCell = newRow.insertCell();
+            const buffBtnContainer = document.createElement('div');
+            buffBtnContainer.className = 'btn-container';
+
             const buffLinkOpen = document.createElement('span');
+            buffLinkOpen.className = 'btn-link';
             buffLinkOpen.textContent = 'Открыть';
-            buffLinkOpen.style.cursor = 'pointer';
             buffLinkOpen.addEventListener('click', () => window.open(buffLink, '_blank'));
             const buffLinkCopy = document.createElement('span');
+            buffLinkCopy.className = 'btn-link';
             buffLinkCopy.textContent = 'Скопировать';
-            buffLinkCopy.style.cursor = 'pointer';
             buffLinkCopy.addEventListener('click', () => copyToClipboard(buffLink));
 
-            buffLinkCell.appendChild(buffLinkOpen);
-            buffLinkCell.appendChild(document.createTextNode(' '));
-            buffLinkCell.appendChild(buffLinkCopy);
+            buffBtnContainer.appendChild(buffLinkOpen);
+            buffBtnContainer.appendChild(buffLinkCopy);
+            buffLinkCell.appendChild(buffBtnContainer);
         }
 
         // Функция для копирования текста в буфер обмена
@@ -127,8 +148,4 @@
 
         // Создание строк в таблице с полученными данными
         for (let i = 0; i < names.length; i++) {
-            createTableRow(names[i], prices[i], links[i], buffs[i], buffLinks[i]);
-        }
-    </script>
-</body>
-</html>
+            createTableRow(names[i], prices[i], links[i],                                                                       
